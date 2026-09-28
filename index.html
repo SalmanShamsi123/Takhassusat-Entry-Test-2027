@@ -80,15 +80,24 @@ button:hover {
       method="POST"
       target="hiddenFrame">
 
-  <!-- C -->
+  <!-- Photo -->
+  <label>Photo</label>
+  <input type="file"
+         id="photo"
+         accept="image/*"
+         required>
+
+  <input type="hidden" name="photoData" id="photoData">
+
+  <!-- Name -->
   <label>Name</label>
   <input type="text" name="name" required>
 
-  <!-- D -->
+  <!-- Father Name -->
   <label>Father Name</label>
   <input type="text" name="fatherName" required>
 
-  <!-- E -->
+  <!-- Mobile -->
   <label>Mobile Number</label>
   <input type="tel" name="mobile" required>
 
@@ -107,7 +116,10 @@ button:hover {
 
   <!-- G -->
   <label>Faraghat K Saal</label>
-  <input type="number" name="faragatYear" placeholder="Example: 2025" required>
+  <input type="number"
+         name="faragatYear"
+         placeholder="Example: 2025"
+         required>
 
   <!-- H -->
   <label>Kis Takhassus K Test Dena Hai</label>
@@ -142,15 +154,37 @@ button:hover {
 </div>
 
 <script>
-document.getElementById("entryForm").addEventListener("submit", function() {
+document.getElementById("entryForm").addEventListener("submit", function(e) {
 
-  document.getElementById("message").innerHTML =
-    "Form submit ho raha hai...";
+  e.preventDefault();
 
-  setTimeout(function() {
-    document.getElementById("message").innerHTML =
-      "Form successfully submitted.";
-  }, 3000);
+  const photo = document.getElementById("photo");
+  const message = document.getElementById("message");
+  const form = this;
+
+  if (!photo.files.length) {
+    message.innerHTML = "Please select a photo.";
+    return;
+  }
+
+  message.innerHTML = "Photo prepare ho rahi hai...";
+
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+
+    document.getElementById("photoData").value = event.target.result;
+
+    message.innerHTML = "Form submit ho raha hai...";
+
+    form.submit();
+
+    setTimeout(function() {
+      message.innerHTML = "Form successfully submitted.";
+    }, 4000);
+  };
+
+  reader.readAsDataURL(photo.files[0]);
 
 });
 </script>
