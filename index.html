@@ -1,387 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+const SHEET_NAME = "Sheet1";
+const FOLDER_ID = "1FRoW0PGcFIoTuLd56UUKVDJy2sp-4_j5";
 
-<title>Tadrisi Course 2027</title>
-
-<style>
-* {
-  box-sizing: border-box;
+function doGet() {
+  return HtmlService.createHtmlOutput(
+    "Tadrisi Course 2027 API is working"
+  );
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f8f5;
-  color: #173b2b;
-}
-
-.container {
-  max-width: 650px;
-  margin: 30px auto;
-  padding: 20px;
-}
-
-.card {
-  background: white;
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 28px;
-  color: #175c3a;
-}
-
-.header p {
-  margin: 8px 0 0;
-  color: #666;
-}
-
-label {
-  display: block;
-  margin-top: 16px;
-  margin-bottom: 6px;
-  font-weight: bold;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #cbd8d0;
-  border-radius: 9px;
-  font-size: 16px;
-}
-
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #2d7a52;
-}
-
-button {
-  width: 100%;
-  margin-top: 25px;
-  padding: 14px;
-  border: none;
-  border-radius: 9px;
-  background: #17613c;
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:disabled {
-  background: #999;
-}
-
-.photo-box {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.preview {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #17613c;
-  display: none;
-  margin: 10px auto;
-}
-
-.message {
-  display: none;
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.success {
-  background: #e5f6eb;
-  color: #17613c;
-}
-
-.error {
-  background: #fde8e8;
-  color: #a40000;
-}
-
-.tracking {
-  font-size: 22px;
-  font-weight: bold;
-  margin-top: 8px;
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<div class="card">
-
-<div class="header">
-  <h1>تدریسی کورس</h1>
-  <p>Tadrisi Course 2027</p>
-</div>
-
-<form id="studentForm">
-
-<div class="photo-box">
-
-<label>Profile Photo</label>
-
-<input
-  type="file"
-  id="photo"
-  accept="image/*"
-  required
->
-
-<img id="preview" class="preview">
-
-</div>
-
-<label for="name">Name</label>
-<input
-  type="text"
-  id="name"
-  placeholder="Enter Name"
-  required
->
-
-<label for="fatherName">Father Name</label>
-<input
-  type="text"
-  id="fatherName"
-  placeholder="Enter Father Name"
-  required
->
-
-<label for="mansab">Mansab</label>
-<input
-  type="text"
-  id="mansab"
-  placeholder="Enter Mansab"
-  required
->
-
-<label for="jamiaName">Jamia Name</label>
-<input
-  type="text"
-  id="jamiaName"
-  placeholder="Enter Jamia Name"
-  required
->
-
-<label for="whatsapp">WhatsApp Number</label>
-<input
-  type="tel"
-  id="whatsapp"
-  placeholder="Enter WhatsApp Number"
-  required
->
-
-<label for="city">City</label>
-<input
-  type="text"
-  id="city"
-  placeholder="Enter City"
-  required
->
-
-<label for="course">Course</label>
-
-<select id="course" required>
-
-<option value="">Select Course</option>
-
-<option value="Tadrisi Course">
-Tadrisi Course
-</option>
-
-</select>
-
-<label for="year">Year</label>
-
-<select id="year" required>
-
-<option value="2027">2027</option>
-
-</select>
-
-<button type="submit" id="submitBtn">
-Submit Form
-</button>
-
-</form>
-
-<div id="successMessage" class="message success">
-
-<strong>Form Successfully Submitted!</strong>
-
-<div>Your Tracking Code:</div>
-
-<div id="trackingCode" class="tracking"></div>
-
-</div>
-
-<div id="errorMessage" class="message error"></div>
-
-</div>
-
-</div>
-
-<script>
-
-const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbyWX6blAMccoMMuRWi-QlibsX50CQXBvCn8iXtFs_RTsCVdlZJMt7l5ylJ4ke-tusEj/exec";
-
-const photoInput = document.getElementById("photo");
-const preview = document.getElementById("preview");
-
-photoInput.addEventListener("change", function() {
-
-  const file = this.files[0];
-
-  if (!file) return;
-
-  const reader = new FileReader();
-
-  reader.onload = function(e) {
-    preview.src = e.target.result;
-    preview.style.display = "block";
-  };
-
-  reader.readAsDataURL(file);
-
-});
-
-
-document.getElementById("studentForm")
-.addEventListener("submit", async function(e) {
-
-  e.preventDefault();
-
-  const submitBtn =
-    document.getElementById("submitBtn");
-
-  const successMessage =
-    document.getElementById("successMessage");
-
-  const errorMessage =
-    document.getElementById("errorMessage");
-
-  submitBtn.disabled = true;
-  submitBtn.innerText = "Submitting...";
-
-  successMessage.style.display = "none";
-  errorMessage.style.display = "none";
-
+function doPost(e) {
   try {
+    const sheet = SpreadsheetApp
+      .getActiveSpreadsheet()
+      .getSheetByName(SHEET_NAME);
 
-    const file =
-      document.getElementById("photo").files[0];
+    const folder = DriveApp.getFolderById(FOLDER_ID);
 
-    if (!file) {
-      throw new Error("Please select a photo.");
-    }
+    const rowNumber = sheet.getLastRow() + 1;
 
-    const reader = new FileReader();
+    const trackingCode =
+      "TC-2027-" +
+      Utilities.formatString("%05d", rowNumber - 1);
 
-    reader.onload = async function() {
+    let photoUrl = "";
 
-      const data = {
+    if (e.parameter.photoData) {
+      const parts = e.parameter.photoData.split(",");
+      const contentType =
+        parts[0].match(/data:(.*?);base64/)[1];
 
-        photo: file.name,
+      const bytes =
+        Utilities.base64Decode(parts[1]);
 
-        photoData: reader.result,
-
-        name:
-          document.getElementById("name").value,
-
-        fatherName:
-          document.getElementById("fatherName").value,
-
-        mansab:
-          document.getElementById("mansab").value,
-
-        jamiaName:
-          document.getElementById("jamiaName").value,
-
-        whatsapp:
-          document.getElementById("whatsapp").value,
-
-        city:
-          document.getElementById("city").value,
-
-        course:
-          document.getElementById("course").value,
-
-        year:
-          document.getElementById("year").value
-
-      };
-
-      const response = await fetch(
-        SCRIPT_URL,
-        {
-          method: "POST",
-          body: JSON.stringify(data)
-        }
+      const blob = Utilities.newBlob(
+        bytes,
+        contentType,
+        trackingCode + "_Photo.jpg"
       );
 
-      const result =
-        await response.json();
+      const file = folder.createFile(blob);
+      photoUrl = file.getUrl();
+    }
 
-      if (!result.success) {
-        throw new Error(result.error || "Submission failed.");
-      }
+    sheet.appendRow([
+      trackingCode,
+      photoUrl,
+      e.parameter.name || "",
+      e.parameter.fatherName || "",
+      e.parameter.mansab || "",
+      e.parameter.jamiaName || "",
+      e.parameter.whatsapp || "",
+      e.parameter.city || "",
+      e.parameter.course || "",
+      e.parameter.year || "2027",
+      "Pending",
+      "",
+      new Date()
+    ]);
 
-      document.getElementById("trackingCode")
-        .innerText = result.trackingCode;
-
-      successMessage.style.display = "block";
-
-      document.getElementById("studentForm").reset();
-
-      preview.style.display = "none";
-
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Submit Form";
-
-    };
-
-    reader.readAsDataURL(file);
+    return HtmlService.createHtmlOutput(`
+      <script>
+        window.parent.postMessage({
+          success: true,
+          trackingCode: "${trackingCode}"
+        }, "*");
+      </script>
+    `);
 
   } catch (error) {
 
-    errorMessage.innerText =
-      "Error: " + error.message;
-
-    errorMessage.style.display = "block";
-
-    submitBtn.disabled = false;
-    submitBtn.innerText = "Submit Form";
-
+    return HtmlService.createHtmlOutput(`
+      <script>
+        window.parent.postMessage({
+          success: false,
+          error: ${JSON.stringify(error.toString())}
+        }, "*");
+      </script>
+    `);
   }
-
-});
-
-</script>
-
-</body>
-</html>
+}
