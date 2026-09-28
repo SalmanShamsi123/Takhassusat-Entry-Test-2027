@@ -1,73 +1,193 @@
-const SHEET_NAME = "Sheet1";
-const FOLDER_ID = "1FRoW0PGcFIoTuLd56UUKVDJy2sp-4_j5";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-function doGet() {
-  return HtmlService.createHtmlOutput(
-    "Takhassusat Entry Test 2027 API is working"
-  );
+<title>Takhassusat Entry Test 2027</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f8f5;
+  margin: 0;
+  padding: 20px;
 }
 
-function doPost(e) {
-  try {
-    const sheet = SpreadsheetApp
-      .getActiveSpreadsheet()
-      .getSheetByName(SHEET_NAME);
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+}
 
-    const folder = DriveApp.getFolderById(FOLDER_ID);
+h1 {
+  text-align: center;
+  color: #176b3a;
+  margin-bottom: 25px;
+}
 
-    const rowNumber = sheet.getLastRow() + 1;
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
 
-    const trackingCode =
-      "TET-2027-" +
-      Utilities.formatString("%05d", rowNumber - 1);
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
 
-    let photoUrl = "";
+button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 13px;
+  background: #176b3a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 17px;
+  cursor: pointer;
+}
 
-    // Photo ko Google Drive mein save karna
-    if (e.parameter.photoData) {
+button:hover {
+  background: #12552e;
+}
 
-      const parts = e.parameter.photoData.split(",");
-      const contentType =
-        parts[0].match(/data:(.*?);base64/)[1];
+#message {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+</style>
+</head>
 
-      const bytes =
-        Utilities.base64Decode(parts[1]);
+<body>
 
-      const blob = Utilities.newBlob(
-        bytes,
-        contentType,
-        trackingCode + "_Photo"
-      );
+<div class="container">
 
-      const file = folder.createFile(blob);
+<h1>Takhassusat Entry Test 2027</h1>
 
-      photoUrl = file.getUrl();
-    }
+<form id="entryForm"
+      action="https://script.google.com/macros/s/AKfycbyWX6blAMccoMMuRWi-QlibsX50CQXBvCn8iXtFs_RTsCVdlZJMt7l5ylJ4ke-tusEj/exec"
+      method="POST"
+      target="hiddenFrame">
 
-    // A-K mein exact data
-    sheet.appendRow([
-      trackingCode,                  // A
-      photoUrl,                      // B
-      e.parameter.name || "",        // C
-      e.parameter.fatherName || "",  // D
-      e.parameter.mobile || "",      // E
-      e.parameter.jamiaFarigh || "", // F
-      e.parameter.faragatYear || "", // G
-      e.parameter.takhassus || "",   // H
-      e.parameter.testJamia || "",   // I
-      "Pending",                     // J
-      ""                             // K
-    ]);
+  <!-- Photo -->
+  <label>Photo</label>
+  <input type="file"
+         id="photo"
+         accept="image/*"
+         required>
 
-    return HtmlService.createHtmlOutput(
-      "Form Submitted Successfully<br>" +
-      "Tracking Code: " + trackingCode
-    );
+  <input type="hidden" name="photoData" id="photoData">
 
-  } catch (error) {
+  <!-- Name -->
+  <label>Name</label>
+  <input type="text" name="name" required>
 
-    return HtmlService.createHtmlOutput(
-      "Error: " + error.toString()
-    );
+  <!-- Father Name -->
+  <label>Father Name</label>
+  <input type="text" name="fatherName" required>
+
+  <!-- Mobile -->
+  <label>Mobile Number</label>
+  <input type="tel" name="mobile" required>
+
+  <!-- F -->
+  <label>Kis Jamia Se Farigh Hai</label>
+  <select name="jamiaFarigh" required>
+    <option value="">Select Jamia</option>
+    <option>Nagpur</option>
+    <option>Ahmedabad</option>
+    <option>Mumbai</option>
+    <option>Modasa</option>
+    <option>Shahjahanpur</option>
+    <option>Nepal</option>
+    <option>Agra</option>
+  </select>
+
+  <!-- G -->
+  <label>Faraghat K Saal</label>
+  <input type="number"
+         name="faragatYear"
+         placeholder="Example: 2025"
+         required>
+
+  <!-- H -->
+  <label>Kis Takhassus K Test Dena Hai</label>
+  <select name="takhassus" required>
+    <option value="">Select Takhassus</option>
+    <option>Takhassus Fil Fiqh</option>
+    <option>Takhassus Fil Hadees</option>
+    <option>Takhassus Fil Aqaid</option>
+    <option>Takhassus Fit Tadrees</option>
+  </select>
+
+  <!-- I -->
+  <label>Kis Jamia Me Dena Hai</label>
+  <select name="testJamia" required>
+    <option value="">Select Jamia</option>
+    <option>Nagpur</option>
+    <option>Ahmedabad</option>
+    <option>Mumbai</option>
+    <option>Modasa</option>
+    <option>Shahjahanpur</option>
+    <option>Agra</option>
+  </select>
+
+  <button type="submit">Submit Form</button>
+
+</form>
+
+<iframe name="hiddenFrame" style="display:none;"></iframe>
+
+<div id="message"></div>
+
+</div>
+
+<script>
+document.getElementById("entryForm").addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const photo = document.getElementById("photo");
+  const message = document.getElementById("message");
+  const form = this;
+
+  if (!photo.files.length) {
+    message.innerHTML = "Please select a photo.";
+    return;
   }
-}
+
+  message.innerHTML = "Photo prepare ho rahi hai...";
+
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+
+    document.getElementById("photoData").value = event.target.result;
+
+    message.innerHTML = "Form submit ho raha hai...";
+
+    form.submit();
+
+    setTimeout(function() {
+      message.innerHTML = "Form successfully submitted.";
+    }, 4000);
+  };
+
+  reader.readAsDataURL(photo.files[0]);
+
+});
+</script>
+
+</body>
+</html>
