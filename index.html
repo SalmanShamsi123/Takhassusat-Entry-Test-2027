@@ -1,80 +1,159 @@
-const SHEET_NAME = "Sheet1";
-const FOLDER_ID = "1FRoW0PGcFIoTuLd56UUKVDJy2sp-4_j5";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-function doGet() {
-  return HtmlService.createHtmlOutput(
-    "Tadrisi Course 2027 API is working"
-  );
+<title>Takhassusat Entry Test 2027</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f8f5;
+  margin: 0;
+  padding: 20px;
 }
 
-function doPost(e) {
-  try {
-    const sheet = SpreadsheetApp
-      .getActiveSpreadsheet()
-      .getSheetByName(SHEET_NAME);
-
-    const folder = DriveApp.getFolderById(FOLDER_ID);
-
-    const rowNumber = sheet.getLastRow() + 1;
-
-    const trackingCode =
-      "TC-2027-" +
-      Utilities.formatString("%05d", rowNumber - 1);
-
-    let photoUrl = "";
-
-    if (e.parameter.photoData) {
-      const parts = e.parameter.photoData.split(",");
-      const contentType =
-        parts[0].match(/data:(.*?);base64/)[1];
-
-      const bytes =
-        Utilities.base64Decode(parts[1]);
-
-      const blob = Utilities.newBlob(
-        bytes,
-        contentType,
-        trackingCode + "_Photo.jpg"
-      );
-
-      const file = folder.createFile(blob);
-      photoUrl = file.getUrl();
-    }
-
-    sheet.appendRow([
-      trackingCode,
-      photoUrl,
-      e.parameter.name || "",
-      e.parameter.fatherName || "",
-      e.parameter.mansab || "",
-      e.parameter.jamiaName || "",
-      e.parameter.whatsapp || "",
-      e.parameter.city || "",
-      e.parameter.course || "",
-      e.parameter.year || "2027",
-      "Pending",
-      "",
-      new Date()
-    ]);
-
-    return HtmlService.createHtmlOutput(`
-      <script>
-        window.parent.postMessage({
-          success: true,
-          trackingCode: "${trackingCode}"
-        }, "*");
-      </script>
-    `);
-
-  } catch (error) {
-
-    return HtmlService.createHtmlOutput(`
-      <script>
-        window.parent.postMessage({
-          success: false,
-          error: ${JSON.stringify(error.toString())}
-        }, "*");
-      </script>
-    `);
-  }
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.10);
 }
+
+h1 {
+  text-align: center;
+  color: #176b3a;
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 13px;
+  background: #176b3a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #12552e;
+}
+
+#message {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Takhassusat Entry Test 2027</h1>
+
+<form id="entryForm"
+      action="https://script.google.com/macros/s/AKfycbyWX6blAMccoMMuRWi-QlibsX50CQXBvCn8iXtFs_RTsCVdlZJMt7l5ylJ4ke-tusEj/exec"
+      method="POST"
+      target="hiddenFrame">
+
+  <!-- C -->
+  <label>Name</label>
+  <input type="text" name="name" required>
+
+  <!-- D -->
+  <label>Father Name</label>
+  <input type="text" name="fatherName" required>
+
+  <!-- E -->
+  <label>Mobile Number</label>
+  <input type="tel" name="mobile" required>
+
+  <!-- F -->
+  <label>Kis Jamia Se Farigh Hai</label>
+  <select name="jamiaFarigh" required>
+    <option value="">Select Jamia</option>
+    <option>Nagpur</option>
+    <option>Ahmedabad</option>
+    <option>Mumbai</option>
+    <option>Modasa</option>
+    <option>Shahjahanpur</option>
+    <option>Nepal</option>
+    <option>Agra</option>
+  </select>
+
+  <!-- G -->
+  <label>Faraghat K Saal</label>
+  <input type="number" name="faragatYear" placeholder="Example: 2025" required>
+
+  <!-- H -->
+  <label>Kis Takhassus K Test Dena Hai</label>
+  <select name="takhassus" required>
+    <option value="">Select Takhassus</option>
+    <option>Takhassus Fil Fiqh</option>
+    <option>Takhassus Fil Hadees</option>
+    <option>Takhassus Fil Aqaid</option>
+    <option>Takhassus Fit Tadrees</option>
+  </select>
+
+  <!-- I -->
+  <label>Kis Jamia Me Dena Hai</label>
+  <select name="testJamia" required>
+    <option value="">Select Jamia</option>
+    <option>Nagpur</option>
+    <option>Ahmedabad</option>
+    <option>Mumbai</option>
+    <option>Modasa</option>
+    <option>Shahjahanpur</option>
+    <option>Agra</option>
+  </select>
+
+  <button type="submit">Submit Form</button>
+
+</form>
+
+<iframe name="hiddenFrame" style="display:none;"></iframe>
+
+<div id="message"></div>
+
+</div>
+
+<script>
+document.getElementById("entryForm").addEventListener("submit", function() {
+
+  document.getElementById("message").innerHTML =
+    "Form submit ho raha hai...";
+
+  setTimeout(function() {
+    document.getElementById("message").innerHTML =
+      "Form successfully submitted.";
+  }, 3000);
+
+});
+</script>
+
+</body>
+</html>
