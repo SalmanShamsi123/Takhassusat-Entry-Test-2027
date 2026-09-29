@@ -250,9 +250,12 @@
         msg.className = "msg error";
         msg.textContent = "اس کوڈ اور موبائل نمبر سے کوئی درخواست نہیں ملی۔";
       } else {
-        const result = out.result ? out.result : "ابھی نتیجہ جاری نہیں ہوا";
+        const pending = "ابھی نتیجہ جاری نہیں ہوا";
+        const tahriri = out.tahriri ? out.tahriri : pending;
+        const taqreri = out.taqreri ? out.taqreri : pending;
         msg.innerHTML = '<div class="success-box"><strong>' + escapeHtml(out.name) + '</strong><br>اسٹیٹس: ' +
-          escapeHtml(out.status) + '<br>نتیجہ: ' + escapeHtml(result) + '</div>';
+          escapeHtml(out.status) + '<br>تحریری نتیجہ: ' + escapeHtml(tahriri) +
+          '<br>تقریری نتیجہ: ' + escapeHtml(taqreri) + '</div>';
       }
     } catch (err) {
       msg.className = "msg error";
