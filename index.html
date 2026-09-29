@@ -1,193 +1,270 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Takhassusat Entry Test 2027</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ٹیسٹ رجسٹریشن</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@600;700&display=swap" rel="stylesheet">
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f8f5;
-  margin: 0;
-  padding: 20px;
-}
-
-.container {
-  max-width: 600px;
-  margin: auto;
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.10);
-}
-
-h1 {
-  text-align: center;
-  color: #176b3a;
-  margin-bottom: 25px;
-}
-
-label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-input, select {
-  width: 100%;
-  padding: 12px;
-  margin-top: 6px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 15px;
-}
-
-button {
-  width: 100%;
-  margin-top: 25px;
-  padding: 13px;
-  background: #176b3a;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 17px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #12552e;
-}
-
-#message {
-  text-align: center;
-  margin-top: 20px;
-  font-weight: bold;
-}
+  :root {
+    --bg: #f5f8f6;
+    --panel: #ffffff;
+    --ink: #15201b;
+    --muted: #55645d;
+    --line: #c6d1cb;
+    --green: #1d5c48;
+    --green-dark: #144233;
+    --error: #a3372a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Naskh Arabic", "Segoe UI", Tahoma, serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+  main { max-width: 620px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1, h2 {
+    font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif;
+    margin: 0 0 8px;
+    line-height: 1.9;
+  }
+  h1 { font-size: 1.7rem; }
+  h2 { font-size: 1.25rem; }
+  p.lead { color: var(--muted); margin: 0 0 24px; }
+  section {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  label { display: block; font-weight: 600; margin: 16px 0 4px; }
+  input, select {
+    width: 100%;
+    padding: 9px 12px;
+    font: inherit;
+    line-height: 1.6;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--ink);
+  }
+  input.ltr { direction: ltr; text-align: right; }
+  input:focus, select:focus, button:focus-visible {
+    outline: 3px solid #8fc9b3;
+    outline-offset: 1px;
+  }
+  .hint { font-size: .9rem; color: var(--muted); margin-top: 2px; }
+  .photo-row { display: flex; gap: 16px; align-items: center; }
+  #preview {
+    width: 84px; height: 104px; object-fit: cover; border-radius: 4px;
+    border: 1px solid var(--line); background: #e9efec; display: none; flex-shrink: 0;
+  }
+  button {
+    margin-top: 24px;
+    width: 100%;
+    padding: 10px;
+    font: inherit;
+    font-weight: 700;
+    color: #fff;
+    background: var(--green);
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover { background: var(--green-dark); }
+  button:disabled { opacity: .6; cursor: wait; }
+  .msg { margin-top: 16px; }
+  .msg.error { color: var(--error); }
+  .success-box {
+    margin-top: 16px; padding: 16px; border-right: 4px solid var(--green);
+    background: #eaf3ee;
+  }
+  .success-box strong.code {
+    display: inline-block; direction: ltr; font-size: 1.4rem; letter-spacing: .06em;
+  }
 </style>
 </head>
-
 <body>
+<main>
+  <h1>ٹیسٹ رجسٹریشن</h1>
+  <p class="lead">اپنی تفصیلات درج کریں۔ جمع کرنے کے بعد آپ کو ایک ٹریکنگ کوڈ ملے گا، جس سے آپ بعد میں اپنا اسٹیٹس اور نتیجہ دیکھ سکتے ہیں۔</p>
 
-<div class="container">
+  <section>
+    <h2>درخواست دیں</h2>
+    <form id="regForm" novalidate>
+      <label for="photo">تصویر</label>
+      <div class="photo-row">
+        <img id="preview" alt="منتخب تصویر">
+        <input id="photo" type="file" accept="image/*" required>
+      </div>
+      <div class="hint">پاسپورٹ سائز کی صاف تصویر لگائیں۔</div>
 
-<h1>Takhassusat Entry Test 2027</h1>
+      <label for="name">نام</label>
+      <input id="name" required>
 
-<form id="entryForm"
-      action="https://script.google.com/macros/s/AKfycbzQS_SRTuMBTOOUPdjEyfoJer7zDkGw5G-T8PVsSlW4cgK53s1OMQ6oLA0N_Akhd1Dm/exec"
-      method="POST"
-      target="hiddenFrame">
+      <label for="fatherName">والد کا نام</label>
+      <input id="fatherName" required>
 
-  <!-- Photo -->
-  <label>Photo</label>
-  <input type="file"
-         id="photo"
-         accept="image/*"
-         required>
+      <label for="mobile">موبائل نمبر</label>
+      <input id="mobile" class="ltr" type="tel" inputmode="numeric" required>
 
-  <input type="hidden" name="photoData" id="photoData">
+      <label for="graduatedFrom">کس جامعہ سے فارغ ہیں؟</label>
+      <select id="graduatedFrom" required>
+        <option value="" selected disabled>منتخب کریں</option>
+        <option>ممبئی</option>
+        <option>نیپال</option>
+        <option>ناگپور</option>
+        <option>موڈاسا</option>
+        <option>شاہ جہان پور</option>
+        <option>آگرہ</option>
+      </select>
 
-  <!-- Name -->
-  <label>Name</label>
-  <input type="text" name="name" required>
+      <label for="graduationYear">فراغت کا سال</label>
+      <input id="graduationYear" class="ltr" inputmode="numeric" maxlength="4" required>
 
-  <!-- Father Name -->
-  <label>Father Name</label>
-  <input type="text" name="fatherName" required>
+      <label for="specialization">کس تخصص کا ٹیسٹ دینا ہے؟</label>
+      <select id="specialization" required>
+        <option value="" selected disabled>منتخب کریں</option>
+        <option>تخصص فی الفقہ</option>
+        <option>تخصص فی الحدیث</option>
+        <option>تخصص فی التدریس</option>
+        <option>تخصص فی العقیدۃ و الکلام</option>
+      </select>
 
-  <!-- Mobile -->
-  <label>Mobile Number</label>
-  <input type="tel" name="mobile" required>
+      <label for="testJamia">کہاں ٹیسٹ دیں گے؟</label>
+      <select id="testJamia" required>
+        <option value="" selected disabled>منتخب کریں</option>
+        <option>ممبئی</option>
+        <option>ناگپور</option>
+        <option>موڈاسا</option>
+        <option>شاہ جہان پور</option>
+        <option>آگرہ</option>
+      </select>
 
-  <!-- F -->
-  <label>Kis Jamia Se Farigh Hai</label>
-  <select name="jamiaFarigh" required>
-    <option value="">Select Jamia</option>
-    <option>Nagpur</option>
-    <option>Ahmedabad</option>
-    <option>Mumbai</option>
-    <option>Modasa</option>
-    <option>Shahjahanpur</option>
-    <option>Nepal</option>
-    <option>Agra</option>
-  </select>
+      <button id="submitBtn" type="submit">درخواست جمع کریں</button>
+      <div id="formMsg" class="msg" role="status"></div>
+    </form>
+  </section>
 
-  <!-- G -->
-  <label>Faraghat K Saal</label>
-  <input type="number"
-         name="faragatYear"
-         placeholder="Example: 2025"
-         required>
+  <section>
+    <h2>اسٹیٹس اور نتیجہ دیکھیں</h2>
+    <form id="trackForm" novalidate>
+      <label for="tCode">ٹریکنگ کوڈ</label>
+      <input id="tCode" class="ltr" placeholder="TC0002" required>
 
-  <!-- H -->
-  <label>Kis Takhassus K Test Dena Hai</label>
-  <select name="takhassus" required>
-    <option value="">Select Takhassus</option>
-    <option>Takhassus Fil Fiqh</option>
-    <option>Takhassus Fil Hadees</option>
-    <option>Takhassus Fil Aqaid</option>
-    <option>Takhassus Fit Tadrees</option>
-  </select>
+      <label for="tMobile">درخواست میں دیا گیا موبائل نمبر</label>
+      <input id="tMobile" class="ltr" type="tel" inputmode="numeric" required>
 
-  <!-- I -->
-  <label>Kis Jamia Me Dena Hai</label>
-  <select name="testJamia" required>
-    <option value="">Select Jamia</option>
-    <option>Nagpur</option>
-    <option>Ahmedabad</option>
-    <option>Mumbai</option>
-    <option>Modasa</option>
-    <option>Shahjahanpur</option>
-    <option>Agra</option>
-  </select>
-
-  <button type="submit">Submit Form</button>
-
-</form>
-
-<iframe name="hiddenFrame" style="display:none;"></iframe>
-
-<div id="message"></div>
-
-</div>
+      <button id="trackBtn" type="submit">اسٹیٹس دیکھیں</button>
+      <div id="trackMsg" class="msg" role="status"></div>
+    </form>
+  </section>
+</main>
 
 <script>
-document.getElementById("entryForm").addEventListener("submit", function(e) {
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby2oXlF7Kg8QlrXTaKP9QIV4KKqwqoHeWj1iJuGngyndvuePMkk2oqf72ezsMLfds0FfA/exec";
 
-  e.preventDefault();
+  const $ = (id) => document.getElementById(id);
+  let photoBase64 = "";
 
-  const photo = document.getElementById("photo");
-  const message = document.getElementById("message");
-  const form = this;
+  // Photo ko browser me chhota karte hain taake upload halka rahe
+  $("photo").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const img = new Image();
+    img.onload = () => {
+      const max = 600;
+      const scale = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement("canvas");
+      c.width = Math.round(img.width * scale);
+      c.height = Math.round(img.height * scale);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      const dataUrl = c.toDataURL("image/jpeg", 0.8);
+      photoBase64 = dataUrl.split(",")[1];
+      $("preview").src = dataUrl;
+      $("preview").style.display = "block";
+    };
+    img.src = URL.createObjectURL(file);
+  });
 
-  if (!photo.files.length) {
-    message.innerHTML = "Please select a photo.";
-    return;
+  $("regForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const msg = $("formMsg");
+    msg.className = "msg";
+    msg.textContent = "";
+
+    const fields = ["name", "fatherName", "mobile", "graduatedFrom", "graduationYear", "specialization", "testJamia"];
+    const data = {};
+    for (const f of fields) data[f] = $(f).value.trim();
+
+    if (!photoBase64) { msg.className = "msg error"; msg.textContent = "براہ کرم اپنی تصویر لگائیں۔"; return; }
+    if (fields.some((f) => !data[f])) { msg.className = "msg error"; msg.textContent = "براہ کرم تمام خانے پُر کریں۔"; return; }
+    if (!/^\d{10,13}$/.test(data.mobile.replace(/\D/g, ""))) { msg.className = "msg error"; msg.textContent = "درست موبائل نمبر درج کریں۔"; return; }
+    if (!/^\d{4}$/.test(data.graduationYear)) { msg.className = "msg error"; msg.textContent = "فراغت کا سال چار ہندسوں میں لکھیں، جیسے 2020۔"; return; }
+
+    data.photo = photoBase64;
+    $("submitBtn").disabled = true;
+    msg.textContent = "جمع ہو رہا ہے...";
+
+    try {
+      // text/plain رکھنے سے CORS preflight نہیں ہوتا، جو Apps Script سنبھال نہیں سکتا
+      const res = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(data)
+      });
+      const out = await res.json();
+      if (out.result !== "success") throw new Error(out.error || "Failed");
+      msg.innerHTML = '<div class="success-box">آپ کی درخواست جمع ہو گئی۔ آپ کا ٹریکنگ کوڈ:<br><strong class="code">' +
+        out.code + '</strong><br>یہ کوڈ محفوظ کر لیں۔ نتیجہ دیکھنے کے لیے اس کے ساتھ موبائل نمبر بھی درکار ہوگا۔</div>';
+      $("regForm").reset();
+      $("preview").style.display = "none";
+      photoBase64 = "";
+    } catch (err) {
+      msg.className = "msg error";
+      msg.textContent = "درخواست جمع نہیں ہو سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔";
+    } finally {
+      $("submitBtn").disabled = false;
+    }
+  });
+
+  $("trackForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const msg = $("trackMsg");
+    msg.className = "msg";
+    const code = $("tCode").value.trim();
+    const mobile = $("tMobile").value.trim();
+    if (!code || !mobile) { msg.className = "msg error"; msg.textContent = "ٹریکنگ کوڈ اور موبائل نمبر دونوں درج کریں۔"; return; }
+
+    $("trackBtn").disabled = true;
+    msg.textContent = "دیکھا جا رہا ہے...";
+    try {
+      const url = SCRIPT_URL + "?code=" + encodeURIComponent(code) + "&mobile=" + encodeURIComponent(mobile);
+      const out = await (await fetch(url)).json();
+      if (!out.found) {
+        msg.className = "msg error";
+        msg.textContent = "اس کوڈ اور موبائل نمبر سے کوئی درخواست نہیں ملی۔";
+      } else {
+        const result = out.result ? out.result : "ابھی نتیجہ جاری نہیں ہوا";
+        msg.innerHTML = '<div class="success-box"><strong>' + escapeHtml(out.name) + '</strong><br>اسٹیٹس: ' +
+          escapeHtml(out.status) + '<br>نتیجہ: ' + escapeHtml(result) + '</div>';
+      }
+    } catch (err) {
+      msg.className = "msg error";
+      msg.textContent = "ابھی اسٹیٹس نہیں دیکھا جا سکا۔ تھوڑی دیر بعد کوشش کریں۔";
+    } finally {
+      $("trackBtn").disabled = false;
+    }
+  });
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   }
-
-  message.innerHTML = "Photo prepare ho rahi hai...";
-
-  const reader = new FileReader();
-
-  reader.onload = function(event) {
-
-    document.getElementById("photoData").value = event.target.result;
-
-    message.innerHTML = "Form submit ho raha hai...";
-
-    form.submit();
-
-    setTimeout(function() {
-      message.innerHTML = "Form successfully submitted.";
-    }, 4000);
-  };
-
-  reader.readAsDataURL(photo.files[0]);
-
-});
 </script>
-
 </body>
 </html>
