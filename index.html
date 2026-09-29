@@ -209,7 +209,7 @@
 
     data.photo = photoBase64;
     $("submitBtn").disabled = true;
-    msg.textContent = "درخواست جمع نہیں ہو سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔ (Error: " + err.message + ")";
+    msg.textContent = "جمع ہو رہا ہے...";
 
     try {
       // text/plain رکھنے سے CORS preflight نہیں ہوتا، جو Apps Script سنبھال نہیں سکتا
@@ -227,7 +227,7 @@
       photoBase64 = "";
     } catch (err) {
       msg.className = "msg error";
-      msg.textContent = "درخواست جمع نہیں ہو سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔";
+      msg.textContent = "درخواست جمع نہیں ہو سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔ (Error: " + err.message + ")";
     } finally {
       $("submitBtn").disabled = false;
     }
