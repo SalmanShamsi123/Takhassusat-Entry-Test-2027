@@ -209,7 +209,7 @@
 
     data.photo = photoBase64;
     $("submitBtn").disabled = true;
-    msg.textContent = "جمع ہو رہا ہے...";
+    msg.textContent = "درخواست جمع نہیں ہو سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔ (Error: " + err.message + ")";
 
     try {
       // text/plain رکھنے سے CORS preflight نہیں ہوتا، جو Apps Script سنبھال نہیں سکتا
