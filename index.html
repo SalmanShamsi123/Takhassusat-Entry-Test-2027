@@ -5,9 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ٹیسٹ رجسٹریشن</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* Jameel Noori Nastaleeq: font file repo me JameelNooriNastaleeq.ttf naam se upload karni hai */
+  @font-face {
+    font-family: "Jameel Noori Nastaleeq";
+    src: local("Jameel Noori Nastaleeq"), url("JameelNooriNastaleeq.ttf") format("truetype");
+    font-display: swap;
+  }
   :root {
+    --font: "Poppins", "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif;
     --bg: #f5f8f6;
     --panel: #ffffff;
     --ink: #15201b;
@@ -22,18 +29,19 @@
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font-family: "Noto Naskh Arabic", "Segoe UI", Tahoma, serif;
-    font-size: 1.05rem;
-    line-height: 1.8;
+    font-family: var(--font);
+    font-size: 1.15rem;
+    line-height: 2.1;
   }
   main { max-width: 620px; margin: 0 auto; padding: 32px 16px 64px; }
   h1, h2 {
-    font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif;
+    font-family: var(--font);
+    font-weight: 400;
     margin: 0 0 8px;
-    line-height: 1.9;
+    line-height: 2.2;
   }
-  h1 { font-size: 1.7rem; }
-  h2 { font-size: 1.25rem; }
+  h1 { font-size: 2rem; color: var(--green-dark); }
+  h2 { font-size: 1.45rem; color: var(--green-dark); }
   p.lead { color: var(--muted); margin: 0 0 24px; }
   section {
     background: var(--panel);
@@ -42,12 +50,12 @@
     padding: 24px;
     margin-bottom: 24px;
   }
-  label { display: block; font-weight: 600; margin: 16px 0 4px; }
+  label { display: block; font-weight: 600; margin: 12px 0 2px; }
   input, select {
     width: 100%;
-    padding: 9px 12px;
+    padding: 4px 12px;
     font: inherit;
-    line-height: 1.6;
+    line-height: 2.2;
     border: 1px solid var(--line);
     border-radius: 4px;
     background: #fff;
@@ -67,9 +75,10 @@
   button {
     margin-top: 24px;
     width: 100%;
-    padding: 10px;
+    padding: 6px 10px;
     font: inherit;
-    font-weight: 700;
+    line-height: 2.2;
+    font-weight: 600;
     color: #fff;
     background: var(--green);
     border: 0;
@@ -92,14 +101,14 @@
   .rc {
     max-width: 420px; margin: 20px auto 0; background: #fff;
     border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
-    font-family: "Noto Naskh Arabic", "Segoe UI", Tahoma, serif;
+    font-family: var(--font);
   }
   .rc-head {
     background: linear-gradient(135deg, #17503f, #2a8a6d);
     color: #fff; text-align: center; padding: 16px 12px 12px;
   }
-  .rc-title { font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif; font-size: 1.5rem; line-height: 2; }
-  .rc-sub { font-size: .95rem; opacity: .92; direction: ltr; }
+  .rc-title { font-size: 1.7rem; line-height: 2.2; }
+  .rc-sub { font-size: .95rem; opacity: .92; direction: ltr; letter-spacing: .03em; line-height: 1.6; }
   .rc-body { padding: 18px; }
   .rc-top { display: flex; gap: 14px; align-items: flex-start; }
   .c-photo {
@@ -108,8 +117,8 @@
   }
   .c-none { display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: var(--green); }
   .rc-info { flex: 1; min-width: 0; }
-  .rc-name { font-size: 1.35rem; font-weight: 700; color: var(--green-dark); line-height: 1.6; margin-bottom: 2px; }
-  .rc-line { font-size: .98rem; line-height: 1.7; }
+  .rc-name { font-size: 1.55rem; color: var(--green-dark); line-height: 2.1; margin-bottom: 2px; }
+  .rc-line { font-size: 1.05rem; line-height: 2; }
   .rc-line span { color: var(--muted); margin-left: 4px; }
   .rc-code { direction: ltr; unicode-bidi: isolate; font-weight: 700; color: var(--green); letter-spacing: .05em; }
   .rc-takh {
@@ -117,10 +126,10 @@
     background: #eef6f2; border: 1px solid #b9d9c9; border-radius: 10px;
   }
   .rc-takh small { display: block; color: var(--muted); font-size: .85rem; line-height: 1.5; }
-  .rc-takh b { display: block; font-size: 1.2rem; color: var(--green-dark); line-height: 1.8; }
+  .rc-takh b { display: block; font-size: 1.35rem; font-weight: 400; color: var(--green-dark); line-height: 2.2; }
   .rc-status {
     margin-top: 14px; padding: 12px; border-radius: 10px; text-align: center;
-    font-size: 1.15rem; font-weight: 700;
+    font-size: 1.25rem; line-height: 2.1;
   }
   .rc-status.ok   { background: #dcf7e6; color: #14653a; }
   .rc-status.bad  { background: #fde4e1; color: #9b2c20; }
@@ -128,8 +137,8 @@
   .r-item { margin-top: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; }
   .r-item.ok  { border-color: #9bd5b3; }
   .r-item.bad { border-color: #e8a8a1; }
-  .r-title { font-weight: 700; color: var(--ink); }
-  .r-val { font-size: 1.7rem; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+  .r-title { color: var(--ink); font-size: 1.15rem; line-height: 2; }
+  .r-val { font-size: 1.7rem; font-weight: 600; line-height: 1.7; margin-top: 2px; }
   .r-val small { font-size: .95rem; color: var(--muted); font-weight: 400; }
   .r-item.ok .r-val  { color: #14653a; }
   .r-item.bad .r-val { color: #9b2c20; }
@@ -347,7 +356,7 @@
               '<div class="rc-line"><span>کوڈ:</span><bdi class="rc-code">' + escapeHtml(out.code) + '</bdi></div>' +
             '</div>' +
           '</div>' +
-          '<div class="rc-takh"><small>امتحان کا تخصص</small><b>' + escapeHtml(out.specialization) + '</b></div>' +
+          '<div class="rc-takh"><small>تخصص کا نام</small><b>' + escapeHtml(out.specialization) + '</b></div>' +
           '<div class="rc-status ' + statusClass(out.status) + '">اسٹیٹس: ' + escapeHtml(out.status) + '</div>' +
           resultBlock("تحریری ٹیسٹ", out.tahriri) +
           resultBlock("تقریری ٹیسٹ", out.taqreri) +
