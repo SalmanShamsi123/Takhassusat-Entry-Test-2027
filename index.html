@@ -87,6 +87,55 @@
   .success-box strong.code {
     display: inline-block; direction: ltr; font-size: 1.4rem; letter-spacing: .06em;
   }
+
+  /* ---- Result card ---- */
+  .rc {
+    max-width: 420px; margin: 20px auto 0; background: #fff;
+    border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    font-family: "Noto Naskh Arabic", "Segoe UI", Tahoma, serif;
+  }
+  .rc-head {
+    background: linear-gradient(135deg, #17503f, #2a8a6d);
+    color: #fff; text-align: center; padding: 16px 12px 12px;
+  }
+  .rc-title { font-family: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif; font-size: 1.5rem; line-height: 2; }
+  .rc-sub { font-size: .95rem; opacity: .92; direction: ltr; }
+  .rc-body { padding: 18px; }
+  .rc-top { display: flex; gap: 14px; align-items: flex-start; }
+  .c-photo {
+    width: 104px; height: 128px; object-fit: cover; flex-shrink: 0;
+    border-radius: 10px; border: 3px solid #c9eadb; background: #e9efec;
+  }
+  .c-none { display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: var(--green); }
+  .rc-info { flex: 1; min-width: 0; }
+  .rc-name { font-size: 1.35rem; font-weight: 700; color: var(--green-dark); line-height: 1.6; margin-bottom: 2px; }
+  .rc-line { font-size: .98rem; line-height: 1.7; }
+  .rc-line span { color: var(--muted); margin-left: 4px; }
+  .rc-code { direction: ltr; unicode-bidi: isolate; font-weight: 700; color: var(--green); letter-spacing: .05em; }
+  .rc-takh {
+    margin-top: 14px; padding: 10px 12px; text-align: center;
+    background: #eef6f2; border: 1px solid #b9d9c9; border-radius: 10px;
+  }
+  .rc-takh small { display: block; color: var(--muted); font-size: .85rem; line-height: 1.5; }
+  .rc-takh b { display: block; font-size: 1.2rem; color: var(--green-dark); line-height: 1.8; }
+  .rc-status {
+    margin-top: 14px; padding: 12px; border-radius: 10px; text-align: center;
+    font-size: 1.15rem; font-weight: 700;
+  }
+  .rc-status.ok   { background: #dcf7e6; color: #14653a; }
+  .rc-status.bad  { background: #fde4e1; color: #9b2c20; }
+  .rc-status.wait { background: #fff3d6; color: #7a5a06; }
+  .r-item { margin-top: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; }
+  .r-item.ok  { border-color: #9bd5b3; }
+  .r-item.bad { border-color: #e8a8a1; }
+  .r-title { font-weight: 700; color: var(--ink); }
+  .r-val { font-size: 1.7rem; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+  .r-val small { font-size: .95rem; color: var(--muted); font-weight: 400; }
+  .r-item.ok .r-val  { color: #14653a; }
+  .r-item.bad .r-val { color: #9b2c20; }
+  .r-wait { color: var(--muted); margin-top: 2px; }
+  .rc-foot { background: #f4f7f5; text-align: center; color: var(--muted); font-size: .85rem; padding: 10px; border-top: 1px solid var(--line); }
+  #dlBtn { max-width: 420px; display: block; margin: 14px auto 0; }
 </style>
 </head>
 <body>
@@ -128,7 +177,7 @@
       <input id="graduationYear" class="ltr" inputmode="numeric" maxlength="4" required>
 
       <label for="specialization">کس تخصص کا ٹیسٹ دینا ہے؟</label>
-            <select id="specialization" required>
+      <select id="specialization" required>
         <option value="" selected disabled>منتخب کریں</option>
         <option>تخصص فی الحدیث</option>
         <option>تخصص فی التدریس</option>
@@ -165,7 +214,9 @@
   </section>
 </main>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
+  // Apps Script Web app URL (/exec par khatam hota hai, /u/1/ ke bina) yahan paste karein
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeBXRHm1NwNpp6BK5UU5pT6lXgNzF2L1C8_6DbFsLadu6U86pxUNLeX8lzn9Z26lyUpg/exec";
 
   const $ = (id) => document.getElementById(id);
@@ -249,12 +300,7 @@
         msg.className = "msg error";
         msg.textContent = "اس کوڈ اور موبائل نمبر سے کوئی درخواست نہیں ملی۔";
       } else {
-        const pending = "ابھی نتیجہ جاری نہیں ہوا";
-        const tahriri = out.tahriri ? out.tahriri : pending;
-        const taqreri = out.taqreri ? out.taqreri : pending;
-        msg.innerHTML = '<div class="success-box"><strong>' + escapeHtml(out.name) + '</strong><br>اسٹیٹس: ' +
-          escapeHtml(out.status) + '<br>تحریری نتیجہ: ' + escapeHtml(tahriri) +
-          '<br>تقریری نتیجہ: ' + escapeHtml(taqreri) + '</div>';
+        renderCard(msg, out);
       }
     } catch (err) {
       msg.className = "msg error";
@@ -263,6 +309,63 @@
       $("trackBtn").disabled = false;
     }
   });
+
+
+  function statusClass(t) {
+    t = String(t || "");
+    if (/pass|کامیاب/i.test(t)) return "ok";
+    if (/fail|ناکام/i.test(t)) return "bad";
+    return "wait";
+  }
+
+  function resultBlock(title, val) {
+    const v = String(val == null ? "" : val).trim();
+    if (!v) {
+      return '<div class="r-item"><div class="r-title">' + title + '</div><div class="r-wait">نتیجہ ابھی جاری نہیں ہوا</div></div>';
+    }
+    const isNum = /^\d+(\.\d+)?$/.test(v) && Number(v) <= 100;
+    return '<div class="r-item ' + statusClass(v) + '"><div class="r-title">' + title + '</div><div class="r-val">' +
+      escapeHtml(v) + (isNum ? ' <small>/ 100</small>' : '') + '</div></div>';
+  }
+
+  function renderCard(box, out) {
+    const okPhoto = typeof out.photo === "string" && out.photo.indexOf("data:image/jpeg;base64,") === 0;
+    const photo = okPhoto
+      ? '<img class="c-photo" src="' + out.photo + '" alt="">'
+      : '<div class="c-photo c-none">' + escapeHtml(String(out.name || "?").charAt(0)) + '</div>';
+    const when = new Date().toLocaleString("en-GB");
+    box.innerHTML =
+      '<div class="rc" id="rc">' +
+        '<div class="rc-head"><div class="rc-title">تخصصات انٹری ٹیسٹ</div><div class="rc-sub">Result Card · 2027</div></div>' +
+        '<div class="rc-body">' +
+          '<div class="rc-top">' + photo +
+            '<div class="rc-info">' +
+              '<div class="rc-name">' + escapeHtml(out.name) + '</div>' +
+              '<div class="rc-line"><span>والد:</span>' + escapeHtml(out.fatherName) + '</div>' +
+              '<div class="rc-line"><span>موبائل:</span><bdi dir="ltr">' + escapeHtml(out.mobile) + '</bdi></div>' +
+              '<div class="rc-line"><span>ٹیسٹ کا مقام:</span>' + escapeHtml(out.testJamia) + '</div>' +
+              '<div class="rc-line"><span>کوڈ:</span><bdi class="rc-code">' + escapeHtml(out.code) + '</bdi></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="rc-takh"><small>امتحان کا تخصص</small><b>' + escapeHtml(out.specialization) + '</b></div>' +
+          '<div class="rc-status ' + statusClass(out.status) + '">اسٹیٹس: ' + escapeHtml(out.status) + '</div>' +
+          resultBlock("تحریری ٹیسٹ", out.tahriri) +
+          resultBlock("تقریری ٹیسٹ", out.taqreri) +
+        '</div>' +
+        '<div class="rc-foot">دیکھنے کا وقت: ' + escapeHtml(when) + '</div>' +
+      '</div>' +
+      '<button id="dlBtn" type="button">نتیجہ تصویر کے طور پر محفوظ کریں</button>';
+
+    $("dlBtn").addEventListener("click", () => {
+      if (!window.html2canvas) { alert("تصویر بنانے کا ٹول لوڈ نہیں ہو سکا۔ صفحہ دوبارہ کھولیں۔"); return; }
+      html2canvas($("rc"), { scale: 2, backgroundColor: "#ffffff", useCORS: true }).then((canvas) => {
+        const a = document.createElement("a");
+        a.href = canvas.toDataURL("image/png");
+        a.download = "result-" + out.code + ".png";
+        a.click();
+      });
+    });
+  }
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
