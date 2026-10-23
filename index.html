@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ٹیسٹ رجسٹریشن</title>
+<title>تخصصات انٹری ٹیسٹ 2027 | Jamiatul Madina India</title>
+<meta name="description" content="Takhassusat Entry Test 2027 - Specializations Department, Jamiatul Madina India. Online registration and result.">
+<meta name="theme-color" content="#1f3a5c">
+<meta property="og:title" content="تخصصات انٹری ٹیسٹ 2027 | Jamiatul Madina India">
+<meta property="og:description" content="Specializations Department · آن لائن رجسٹریشن اور نتیجہ">
+<link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -15,41 +20,85 @@
   }
   :root {
     --font: "Poppins", "Jameel Noori Nastaleeq", "Noto Nastaliq Urdu", serif;
-    --bg: #f5f8f6;
-    --panel: #ffffff;
-    --ink: #15201b;
-    --muted: #55645d;
-    --line: #c6d1cb;
-    --green: #1d5c48;
-    --green-dark: #144233;
+    --navy: #1f3a5c;
+    --navy-dark: #162a44;
+    --sage: #8fb09c;
+    --sage-light: #e8f0ea;
+    --ivory: #faf8f1;
+    --gold: #b8975a;
+    --gold-light: #ecdcb8;
+    --ink: #1c2430;
+    --muted: #5a6672;
+    --line: #d5dbd6;
     --error: #a3372a;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body {
     margin: 0;
-    background: var(--bg);
+    background: var(--ivory);
     color: var(--ink);
     font-family: var(--font);
     font-size: 1.15rem;
     line-height: 2.1;
   }
-  main { max-width: 620px; margin: 0 auto; padding: 32px 16px 64px; }
-  h1, h2 {
-    font-family: var(--font);
-    font-weight: 400;
-    margin: 0 0 8px;
-    line-height: 2.2;
+
+  /* ---- Header ---- */
+  .site-header {
+    background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+    color: #fff;
+    border-bottom: 4px solid var(--gold);
   }
-  h1 { font-size: 2rem; color: var(--green-dark); }
-  h2 { font-size: 1.45rem; color: var(--green-dark); }
-  p.lead { color: var(--muted); margin: 0 0 24px; }
+  .site-header .inner {
+    max-width: 700px; margin: 0 auto; padding: 20px 16px 18px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .logo { width: 76px; height: 76px; object-fit: contain; flex-shrink: 0; }
+  .org { flex: 1; text-align: center; }
+  .org-en {
+    font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
+    opacity: .85; line-height: 1.7; direction: ltr;
+  }
+  .org h1 { margin: 2px 0 0; font-size: 1.8rem; font-weight: 400; line-height: 2.1; }
+  .org-sub { color: var(--gold-light); font-size: 1.05rem; line-height: 1.9; }
+
+  main { max-width: 700px; margin: 0 auto; padding: 24px 16px 40px; }
+
+  /* ---- Tabs ---- */
+  .tabs {
+    display: flex; gap: 4px; padding: 4px; margin-bottom: 20px;
+    background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  }
+  button.tab {
+    flex: 1; margin: 0; padding: 4px 8px; background: transparent; color: var(--navy);
+    border-radius: 9px; font-weight: 500; line-height: 2.1;
+  }
+  button.tab:hover { background: var(--sage-light); }
+  button.tab.active { background: var(--navy); color: #fff; }
+
+  /* ---- Panels ---- */
   section {
-    background: var(--panel);
+    background: #fff;
     border: 1px solid var(--line);
-    border-radius: 6px;
+    border-radius: 12px;
     padding: 24px;
     margin-bottom: 24px;
+    box-shadow: 0 1px 2px rgba(31, 58, 92, .05);
   }
+  h2 { font-family: var(--font); font-weight: 400; margin: 0 0 4px; font-size: 1.5rem; color: var(--navy); line-height: 2.2; }
+  p.lead { color: var(--muted); margin: 0 0 16px; font-size: 1.05rem; }
+  .notice {
+    background: var(--sage-light); border-right: 4px solid var(--gold);
+    border-radius: 8px; padding: 10px 16px; margin-bottom: 8px; font-size: 1.02rem;
+  }
+  .notice ol { margin: 0; padding: 0 20px 0 0; line-height: 2; }
+  .group-title {
+    margin: 22px 0 4px; padding-bottom: 2px; color: var(--navy);
+    font-size: 1.2rem; line-height: 2.1; border-bottom: 2px solid var(--sage-light);
+  }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+  @media (max-width: 560px) { .grid2 { grid-template-columns: 1fr; } }
+
   label { display: block; font-weight: 600; margin: 12px 0 2px; }
   input, select {
     width: 100%;
@@ -57,20 +106,21 @@
     font: inherit;
     line-height: 2.2;
     border: 1px solid var(--line);
-    border-radius: 4px;
+    border-radius: 8px;
     background: #fff;
     color: var(--ink);
   }
   input.ltr { direction: ltr; text-align: right; }
   input:focus, select:focus, button:focus-visible {
-    outline: 3px solid #8fc9b3;
+    outline: 3px solid var(--gold-light);
     outline-offset: 1px;
+    border-color: var(--gold);
   }
-  .hint { font-size: .9rem; color: var(--muted); margin-top: 2px; }
+  .hint { font-size: .9rem; color: var(--muted); margin-top: 2px; line-height: 1.8; }
   .photo-row { display: flex; gap: 16px; align-items: center; }
   #preview {
-    width: 84px; height: 104px; object-fit: cover; border-radius: 4px;
-    border: 1px solid var(--line); background: #e9efec; display: none; flex-shrink: 0;
+    width: 84px; height: 104px; object-fit: cover; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--sage-light); display: none; flex-shrink: 0;
   }
   button {
     margin-top: 24px;
@@ -80,21 +130,21 @@
     line-height: 2.2;
     font-weight: 600;
     color: #fff;
-    background: var(--green);
+    background: var(--navy);
     border: 0;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
   }
-  button:hover { background: var(--green-dark); }
+  button:hover { background: var(--navy-dark); }
   button:disabled { opacity: .6; cursor: wait; }
   .msg { margin-top: 16px; }
   .msg.error { color: var(--error); }
   .success-box {
-    margin-top: 16px; padding: 16px; border-right: 4px solid var(--green);
-    background: #eaf3ee;
+    margin-top: 16px; padding: 16px; border-right: 4px solid var(--gold);
+    background: var(--sage-light); border-radius: 8px;
   }
   .success-box strong.code {
-    display: inline-block; direction: ltr; font-size: 1.4rem; letter-spacing: .06em;
+    display: inline-block; direction: ltr; font-size: 1.5rem; letter-spacing: .06em; color: var(--navy);
   }
 
   /* ---- Result card ---- */
@@ -104,36 +154,38 @@
     font-family: var(--font);
   }
   .rc-head {
-    background: linear-gradient(135deg, #17503f, #2a8a6d);
-    color: #fff; text-align: center; padding: 16px 12px 12px;
+    background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+    border-bottom: 4px solid var(--gold);
+    color: #fff; text-align: center; padding: 14px 12px 10px;
   }
+  .rc-org { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; opacity: .8; direction: ltr; line-height: 1.6; }
   .rc-title { font-size: 1.7rem; line-height: 2.2; }
-  .rc-sub { font-size: .95rem; opacity: .92; direction: ltr; letter-spacing: .03em; line-height: 1.6; }
+  .rc-sub { font-size: .95rem; color: var(--gold-light); direction: ltr; letter-spacing: .03em; line-height: 1.6; }
   .rc-body { padding: 18px; }
   .rc-top { display: flex; gap: 14px; align-items: flex-start; }
   .c-photo {
     width: 104px; height: 128px; object-fit: cover; flex-shrink: 0;
-    border-radius: 10px; border: 3px solid #c9eadb; background: #e9efec;
+    border-radius: 10px; border: 3px solid var(--sage-light); background: var(--sage-light);
   }
-  .c-none { display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: var(--green); }
+  .c-none { display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: var(--navy); }
   .rc-info { flex: 1; min-width: 0; }
-  .rc-name { font-size: 1.55rem; color: var(--green-dark); line-height: 2.1; margin-bottom: 2px; }
+  .rc-name { font-size: 1.55rem; color: var(--navy); line-height: 2.1; margin-bottom: 2px; }
   .rc-line { font-size: 1.05rem; line-height: 2; }
   .rc-line span { color: var(--muted); margin-left: 4px; }
-  .rc-code { direction: ltr; unicode-bidi: isolate; font-weight: 700; color: var(--green); letter-spacing: .05em; }
+  .rc-code { direction: ltr; unicode-bidi: isolate; font-weight: 700; color: var(--navy); letter-spacing: .05em; }
   .rc-takh {
     margin-top: 14px; padding: 10px 12px; text-align: center;
-    background: #eef6f2; border: 1px solid #b9d9c9; border-radius: 10px;
+    background: var(--sage-light); border: 1px solid var(--sage); border-radius: 10px;
   }
   .rc-takh small { display: block; color: var(--muted); font-size: .85rem; line-height: 1.5; }
-  .rc-takh b { display: block; font-size: 1.35rem; font-weight: 400; color: var(--green-dark); line-height: 2.2; }
+  .rc-takh b { display: block; font-size: 1.35rem; font-weight: 400; color: var(--navy); line-height: 2.2; }
   .rc-status {
     margin-top: 14px; padding: 12px; border-radius: 10px; text-align: center;
     font-size: 1.25rem; line-height: 2.1;
   }
-  .rc-status.ok   { background: #dcf7e6; color: #14653a; }
+  .rc-status.ok   { background: #dcf0e3; color: #14653a; }
   .rc-status.bad  { background: #fde4e1; color: #9b2c20; }
-  .rc-status.wait { background: #fff3d6; color: #7a5a06; }
+  .rc-status.wait { background: #fbf0d6; color: #7a5a06; }
   .r-item { margin-top: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; }
   .r-item.ok  { border-color: #9bd5b3; }
   .r-item.bad { border-color: #e8a8a1; }
@@ -143,18 +195,46 @@
   .r-item.ok .r-val  { color: #14653a; }
   .r-item.bad .r-val { color: #9b2c20; }
   .r-wait { color: var(--muted); margin-top: 2px; }
-  .rc-foot { background: #f4f7f5; text-align: center; color: var(--muted); font-size: .85rem; padding: 10px; border-top: 1px solid var(--line); }
+  .rc-foot { background: var(--ivory); text-align: center; color: var(--muted); font-size: .85rem; padding: 10px; border-top: 1px solid var(--line); }
   #dlBtn { max-width: 420px; display: block; margin: 14px auto 0; }
+
+  footer {
+    text-align: center; color: var(--muted); font-size: .85rem; line-height: 1.8;
+    padding: 0 16px 32px; direction: ltr;
+  }
 </style>
 </head>
 <body>
-<main>
-  <h1>ٹیسٹ رجسٹریشن</h1>
-  <p class="lead">اپنی تفصیلات درج کریں۔ جمع کرنے کے بعد آپ کو ایک ٹریکنگ کوڈ ملے گا، جس سے آپ بعد میں اپنا اسٹیٹس اور نتیجہ دیکھ سکتے ہیں۔</p>
 
-  <section>
-    <h2>درخواست دیں</h2>
+<header class="site-header">
+  <div class="inner">
+    <img class="logo" src="logo.png" alt="Logo" onerror="this.remove()">
+    <div class="org">
+      <div class="org-en">Specializations Department · Jamiatul Madina India</div>
+      <h1>تخصصات انٹری ٹیسٹ 2027</h1>
+      <div class="org-sub">آن لائن رجسٹریشن اور نتیجہ</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <nav class="tabs" role="tablist" aria-label="صفحات">
+    <button type="button" id="tabReg" class="tab active" role="tab" aria-selected="true">درخواست دیں</button>
+    <button type="button" id="tabRes" class="tab" role="tab" aria-selected="false">نتیجہ دیکھیں</button>
+  </nav>
+
+  <section id="regSection">
+    <h2>رجسٹریشن فارم</h2>
+    <div class="notice">
+      <ol>
+        <li>تمام معلومات درست اور مکمل درج کریں۔</li>
+        <li>پاسپورٹ سائز کی صاف تصویر لگائیں۔</li>
+        <li>جمع کرنے کے بعد ملنے والا ٹریکنگ کوڈ محفوظ کر لیں۔</li>
+      </ol>
+    </div>
     <form id="regForm" novalidate>
+      <h3 class="group-title">ذاتی معلومات</h3>
+
       <label for="photo">تصویر</label>
       <div class="photo-row">
         <img id="preview" alt="منتخب تصویر">
@@ -162,28 +242,41 @@
       </div>
       <div class="hint">پاسپورٹ سائز کی صاف تصویر لگائیں۔</div>
 
-      <label for="name">نام</label>
-      <input id="name" required>
-
-      <label for="fatherName">والد کا نام</label>
-      <input id="fatherName" required>
+      <div class="grid2">
+        <div>
+          <label for="name">نام</label>
+          <input id="name" required>
+        </div>
+        <div>
+          <label for="fatherName">والد کا نام</label>
+          <input id="fatherName" required>
+        </div>
+      </div>
 
       <label for="mobile">موبائل نمبر</label>
       <input id="mobile" class="ltr" type="tel" inputmode="numeric" required>
 
-      <label for="graduatedFrom">کس جامعہ سے فارغ ہیں؟</label>
-      <select id="graduatedFrom" required>
-        <option value="" selected disabled>منتخب کریں</option>
-        <option>ممبئی</option>
-        <option>نیپال</option>
-        <option>ناگپور</option>
-        <option>موڈاسا</option>
-        <option>شاہ جہان پور</option>
-        <option>آگرہ</option>
-      </select>
+      <h3 class="group-title">تعلیمی معلومات</h3>
+      <div class="grid2">
+        <div>
+          <label for="graduatedFrom">کس جامعہ سے فارغ ہیں؟</label>
+          <select id="graduatedFrom" required>
+            <option value="" selected disabled>منتخب کریں</option>
+            <option>ممبئی</option>
+            <option>نیپال</option>
+            <option>ناگپور</option>
+            <option>موڈاسا</option>
+            <option>شاہ جہان پور</option>
+            <option>آگرہ</option>
+          </select>
+        </div>
+        <div>
+          <label for="graduationYear">فراغت کا سال</label>
+          <input id="graduationYear" class="ltr" inputmode="numeric" maxlength="4" required>
+        </div>
+      </div>
 
-      <label for="graduationYear">فراغت کا سال</label>
-      <input id="graduationYear" class="ltr" inputmode="numeric" maxlength="4" required>
+      <h3 class="group-title">ٹیسٹ کی معلومات</h3>
 
       <label for="specialization">کس تخصص کا ٹیسٹ دینا ہے؟</label>
       <select id="specialization" required>
@@ -208,13 +301,14 @@
     </form>
   </section>
 
-  <section>
-    <h2>اسٹیٹس اور نتیجہ دیکھیں</h2>
+  <section id="resSection" hidden>
+    <h2>اپنا نتیجہ دیکھیں</h2>
+    <p class="lead">ٹریکنگ کوڈ اور درخواست میں دیا گیا موبائل نمبر درج کریں۔</p>
     <form id="trackForm" novalidate>
       <label for="tCode">ٹریکنگ کوڈ</label>
       <input id="tCode" class="ltr" placeholder="TC0002" required>
 
-      <label for="tMobile">درخواست میں دیا گیا موبائل نمبر</label>
+      <label for="tMobile">موبائل نمبر</label>
       <input id="tMobile" class="ltr" type="tel" inputmode="numeric" required>
 
       <button id="trackBtn" type="submit">اسٹیٹس دیکھیں</button>
@@ -223,6 +317,8 @@
   </section>
 </main>
 
+<footer>© 2027 Specializations Department · Jamiatul Madina India</footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
   // Apps Script Web app URL (/exec par khatam hota hai, /u/1/ ke bina) yahan paste karein
@@ -230,6 +326,21 @@
 
   const $ = (id) => document.getElementById(id);
   let photoBase64 = "";
+
+  // ---- Tabs: "درخواست دیں" / "نتیجہ دیکھیں" ----
+  function showTab(which) {
+    const reg = which === "reg";
+    $("regSection").hidden = !reg;
+    $("resSection").hidden = reg;
+    $("tabReg").classList.toggle("active", reg);
+    $("tabRes").classList.toggle("active", !reg);
+    $("tabReg").setAttribute("aria-selected", String(reg));
+    $("tabRes").setAttribute("aria-selected", String(!reg));
+    try { history.replaceState(null, "", reg ? location.pathname : "#result"); } catch (e) {}
+  }
+  $("tabReg").addEventListener("click", () => showTab("reg"));
+  $("tabRes").addEventListener("click", () => showTab("res"));
+  if (location.hash === "#result") showTab("res");
 
   // Photo ko browser me chhota karte hain taake upload halka rahe
   $("photo").addEventListener("change", (e) => {
@@ -278,6 +389,7 @@
         body: JSON.stringify(data)
       });
       const out = await res.json();
+      if (out.result === "closed") { closeRegistration(); return; }
       if (out.result !== "success") throw new Error(out.error || "Failed");
       msg.innerHTML = '<div class="success-box">آپ کی درخواست جمع ہو گئی۔ آپ کا ٹریکنگ کوڈ:<br><strong class="code">' +
         out.code + '</strong><br>یہ کوڈ محفوظ کر لیں۔ نتیجہ دیکھنے کے لیے اس کے ساتھ موبائل نمبر بھی درکار ہوگا۔</div>';
@@ -319,6 +431,17 @@
     }
   });
 
+  // Registration band hone par form chhup jata hai, sirf status/result dekhna chalta hai
+  function closeRegistration() {
+    $("regSection").innerHTML =
+      '<h2>رجسٹریشن بند ہو چکی ہے</h2>' +
+      '<p class="lead">اب نئی درخواستیں قبول نہیں کی جا رہیں۔ جن امیدواروں نے فارم بھر دیا ہے وہ اپنا ٹریکنگ کوڈ اور موبائل نمبر ڈال کر اسٹیٹس اور نتیجہ دیکھ سکتے ہیں۔</p>';
+    showTab("res");
+  }
+  fetch(SCRIPT_URL + "?action=status")
+    .then((r) => r.json())
+    .then((s) => { if (s && s.open === false) closeRegistration(); })
+    .catch(() => {});
 
   function statusClass(t) {
     t = String(t || "");
@@ -345,7 +468,8 @@
     const when = new Date().toLocaleString("en-GB");
     box.innerHTML =
       '<div class="rc" id="rc">' +
-        '<div class="rc-head"><div class="rc-title">تخصصات انٹری ٹیسٹ</div><div class="rc-sub">Result Card · 2027</div></div>' +
+        '<div class="rc-head"><div class="rc-org">Specializations Department · Jamiatul Madina India</div>' +
+          '<div class="rc-title">تخصصات انٹری ٹیسٹ</div><div class="rc-sub">Result Card · 2027</div></div>' +
         '<div class="rc-body">' +
           '<div class="rc-top">' + photo +
             '<div class="rc-info">' +
