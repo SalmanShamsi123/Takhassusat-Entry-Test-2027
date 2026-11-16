@@ -268,6 +268,7 @@
             <option>موڈاسا</option>
             <option>شاہ جہان پور</option>
             <option>آگرہ</option>
+            <option>احمد آباد</option>
           </select>
         </div>
         <div>
@@ -294,6 +295,7 @@
         <option>موڈاسا</option>
         <option>شاہ جہان پور</option>
         <option>آگرہ</option>
+        <option>احمد آباد</option>
       </select>
 
       <button id="submitBtn" type="submit">درخواست جمع کریں</button>
@@ -345,9 +347,33 @@
   // Photo ko browser me chhota karte hain taake upload halka rahe
   $("photo").addEventListener("change", (e) => {
     const file = e.target.files[0];
+    const msg = $("formMsg");
     if (!file) return;
+
+    // Sirf image file accept karein
+    if (!/^image\//.test(file.type)) {
+      msg.className = "msg error";
+      msg.textContent = "براہ کرم صرف تصویر کی فائل منتخب کریں۔";
+      e.target.value = "";
+      photoBase64 = "";
+      $("preview").style.display = "none";
+      return;
+    }
+
+    const url = URL.createObjectURL(file);
     const img = new Image();
+
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      msg.className = "msg error";
+      msg.textContent = "تصویر کھل نہیں سکی، دوسری تصویر منتخب کریں۔";
+      e.target.value = "";
+      photoBase64 = "";
+      $("preview").style.display = "none";
+    };
+
     img.onload = () => {
+      URL.revokeObjectURL(url);
       const max = 600;
       const scale = Math.min(1, max / Math.max(img.width, img.height));
       const c = document.createElement("canvas");
@@ -358,8 +384,10 @@
       photoBase64 = dataUrl.split(",")[1];
       $("preview").src = dataUrl;
       $("preview").style.display = "block";
+      if (msg.classList.contains("error")) { msg.className = "msg"; msg.textContent = ""; }
     };
-    img.src = URL.createObjectURL(file);
+
+    img.src = url;
   });
 
   $("regForm").addEventListener("submit", async (e) => {
@@ -392,7 +420,7 @@
       if (out.result === "closed") { closeRegistration(); return; }
       if (out.result !== "success") throw new Error(out.error || "Failed");
       msg.innerHTML = '<div class="success-box">آپ کی درخواست جمع ہو گئی۔ آپ کا ٹریکنگ کوڈ:<br><strong class="code">' +
-        out.code + '</strong><br>یہ کوڈ محفوظ کر لیں۔ نتیجہ دیکھنے کے لیے اس کے ساتھ موبائل نمبر بھی درکار ہوگا۔</div>';
+        escapeHtml(out.code) + '</strong><br>یہ کوڈ محفوظ کر لیں۔ نتیجہ دیکھنے کے لیے اس کے ساتھ موبائل نمبر بھی درکار ہوگا۔</div>';
       $("regForm").reset();
       $("preview").style.display = "none";
       photoBase64 = "";
@@ -400,7 +428,9 @@
       msg.className = "msg error";
       msg.textContent = "درخواست جمع نہیں ہو سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔ (Error: " + err.message + ")";
     } finally {
-      $("submitBtn").disabled = false;
+      // closeRegistration() ke baad button DOM me nahi hota, is liye guard
+      const btn = $("submitBtn");
+      if (btn) btn.disabled = false;
     }
   });
 
@@ -416,7 +446,7 @@
     msg.textContent = "دیکھا جا رہا ہے...";
     try {
       const url = SCRIPT_URL + "?code=" + encodeURIComponent(code) + "&mobile=" + encodeURIComponent(mobile);
-      const out = await (await fetch(url)).json();
+      const out = await (await fetch(url, { cache: "no-store" })).json();
       if (!out.found) {
         msg.className = "msg error";
         msg.textContent = "اس کوڈ اور موبائل نمبر سے کوئی درخواست نہیں ملی۔";
@@ -438,15 +468,16 @@
       '<p class="lead">اب نئی درخواستیں قبول نہیں کی جا رہیں۔ جن امیدواروں نے فارم بھر دیا ہے وہ اپنا ٹریکنگ کوڈ اور موبائل نمبر ڈال کر اسٹیٹس اور نتیجہ دیکھ سکتے ہیں۔</p>';
     showTab("res");
   }
-  fetch(SCRIPT_URL + "?action=status")
+  fetch(SCRIPT_URL + "?action=status", { cache: "no-store" })
     .then((r) => r.json())
     .then((s) => { if (s && s.open === false) closeRegistration(); })
     .catch(() => {});
 
   function statusClass(t) {
     t = String(t || "");
+    // "Not Passed" / "Fail" pehle check karein, warna "pass" se galat green ho jata hai
+    if (/fail|ناکام|not\s*pass|absent|غیر حاضر/i.test(t)) return "bad";
     if (/pass|کامیاب/i.test(t)) return "ok";
-    if (/fail|ناکام/i.test(t)) return "bad";
     return "wait";
   }
 
@@ -485,7 +516,7 @@
           resultBlock("تحریری ٹیسٹ", out.tahriri) +
           resultBlock("تقریری ٹیسٹ", out.taqreri) +
         '</div>' +
-        '<div class="rc-foot">دیکھنے کا وقت: ' + escapeHtml(when) + '</div>' +
+        '<div class="rc-foot">دیکھنے کا وقت: <bdi dir="ltr">' + escapeHtml(when) + '</bdi></div>' +
       '</div>' +
       '<button id="dlBtn" type="button">نتیجہ تصویر کے طور پر محفوظ کریں</button>';
 
@@ -494,7 +525,7 @@
       html2canvas($("rc"), { scale: 2, backgroundColor: "#ffffff", useCORS: true }).then((canvas) => {
         const a = document.createElement("a");
         a.href = canvas.toDataURL("image/png");
-        a.download = "result-" + out.code + ".png";
+        a.download = "result-" + String(out.code || "card").replace(/[^\w-]/g, "") + ".png";
         a.click();
       });
     });
